@@ -51,7 +51,7 @@ class PngFile(object):
         bytearray('iCCP'), # ICC color profile.
 
         bytearray('iTXt'), # UTF-8 text, compressed or not, with an optional language tag. iTXt chunk
-        # with the keyword 'XML:com.adobe.xmp' can contain Extensible Metadata Platform (XMP).
+                           # with the keyword 'XML:com.adobe.xmp' can contain Extensible Metadata Platform (XMP).
 
         bytearray('pHYs'), # Holds the intended pixel size and/or aspect ratio of the image.
 
@@ -63,7 +63,8 @@ class PngFile(object):
 
         bytearray('sTER'), # Stereo-image indicator chunk for stereoscopic images.
 
-        bytearray('tEXt'), # Can store text that can be represented in ISO/IEC 8859-1, with one name=value pair for each chunk.
+        bytearray('tEXt'), # Can store text that can be represented in ISO/IEC 8859-1, with one name=value pair
+                           # for each chunk.
 
         bytearray('tIME'), # Stores the time that the image was last changed.
 

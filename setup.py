@@ -9,9 +9,9 @@ setup(name='libctf',
 	author_email='0xmeta@gmail.com',
 	url='http://rootfoo.org',
 	license="http://www.opensource.org/licenses/BSD-3-Clause",
-	package_dir={'libctf':''},
+    package_dir={'libctf':'', 'libctf.imaging': 'imaging'},
 	package_data={'libctf': ['shellcode.json']},
-	packages=['libctf'],
+	packages=['libctf', 'libctf.imaging'],
 	scripts=['ctf-payload']
 	)
 
