@@ -4,10 +4,9 @@ For use in meta/Neg9's libctf
 Copyleft 2015 Ian Gallagher <crash@neg9.org>
 """
 
-import os
-import mmap
-import struct
-import zlib
+import mmap as _mmap
+import struct as _struct
+import zlib as _zlib
 
 class PngFile(object):
     """
@@ -102,7 +101,7 @@ class PngFile(object):
 
         # Open the specified file and load it as mmap data
         with open(path, 'rb') as png_fh:
-            self.mmap = mmap.mmap(png_fh.fileno(), 0, access=mmap.ACCESS_READ)
+            self.mmap = _mmap.mmap(png_fh.fileno(), 0, access=_mmap.ACCESS_READ)
 
         # Populate self.size with the file's total size
         self.size = self.mmap.size()
@@ -149,8 +148,11 @@ class PngFile(object):
             # Store current offset of chunk
             chunk.offset = chunk_offset
 
+            # Seek to specified offset
+            self.mmap.seek(chunk_offset)
+
             # Read length of current chunk
-            chunk.length = struct.unpack('>I', self.mmap.read(4))[0]
+            chunk.length = _struct.unpack('>I', self.mmap.read(4))[0]
 
             # Read chunk type/name (4 bytes, FourCC style)
             chunk.type = bytearray(self.mmap.read(4))
@@ -218,7 +220,7 @@ class PngFile(object):
             self.data = None
             self.crc_claim = None
 
-def test(path):
+def _test(path):
     ret_val = -1
 
     try:
@@ -258,7 +260,7 @@ if '__main__' == __name__:
         sys.stderr.write("Please specify file to test on the command line.\n")
         sys.exit(-1)
 
-    ret_val = test(sys.argv[1])
+    ret_val = _test(sys.argv[1])
     if(0 != ret_val):
         print "test() returned an error."
 

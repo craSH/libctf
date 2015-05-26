@@ -1,7 +1,8 @@
-from sock import * 
+from sock import *
 from data import *
 from shellcode import *
 from pattern import *
+import imaging
 
 try:
 	# Try to import the ipython interactive shell
